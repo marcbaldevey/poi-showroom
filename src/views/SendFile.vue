@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center w-full h-full bg-white text-gray-700">
+  <div class="flex justify-center w-full h-full bg-white text-gray-700 p-10">
     <div class="h-full w-full max-w-7xl flex flex-col">
       <h2 class="text-left text-4xl my-8 text-primary-600 font-extrabold font-sans">Choose your design</h2>
       <Steps :model="items" :readonly="false" />
