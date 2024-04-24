@@ -1,18 +1,40 @@
-# Vue 3 + TypeScript + Vite
+# Project Name
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Installation
 
-## Recommended IDE Setup
+To install the project dependencies, run the following command:
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+```bash
+npm install
+```
 
-## Type Support For `.vue` Imports in TS
+or if you are using yarn:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+```bash
+yarn install
+```
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+or if you are using pnpm:
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+```bash
+pnpm install
+```
+
+## Using the API
+
+To use the API, you first need to obtain a token. Follow these steps to generate a new token:
+
+1. Log in to your POI account.
+2. Navigate to Settings.
+3. Click on API Tokens.
+4. Click on Generate New Token.
+
+This will provide you with a token.
+
+After obtaining the token, you need to add it to your `.env` and `.env.development` files. Replace `VITE_POI_TOKEN` with the token you received:
+
+```properties
+VITE_POI_URL = https://w2pcommunity.tpv7q9c17jna6.eu-west-3.cs.amazonlightsail.com/api
+VITE_POI_FRONTEND_URL = https://w2pcommunity.tpv7q9c17jna6.eu-west-3.cs.amazonlightsail.com
+VITE_POI_TOKEN=yourtoken
+```
