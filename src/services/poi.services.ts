@@ -1,7 +1,7 @@
-const POI_URL = "https://w2pcommunity.tpv7q9c17jna6.eu-west-3.cs.amazonlightsail.com/api";
-const POI_TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlUb2tlbklkIjoyNzEsInVzZXJJZCI6MTg0LCJlbWFpbCI6InNob3dyb29tZGVtb0BlZmkuY29tIiwiY29tcGFueUlkIjoiMzgxNzRiNzAtMTQ5My00YmFjLTliYzItNDQ4NjZjNjhjM2JlIiwiaWF0IjoxNzEzODAzMjIxfQ.53gKDXkoiQsWgsAWkeDeokjxCqDo_cvUzL1vVoL3Aek";
+const POI_URL = import.meta.env.VITE_POI_URL;
+const POI_TOKEN = import.meta.env.VITE_POI_TOKEN;
 import axios from "axios";
+import { Order } from "../types";
 
 const http = axios.create({
   baseURL: POI_URL,
@@ -10,6 +10,23 @@ const http = axios.create({
     Authorization: `Bearer ${POI_TOKEN}`,
   },
 });
+
+const httpForm = axios.create({
+  baseURL: POI_URL,
+  headers: {
+    "Content-type": "multipart/form-data",
+    Authorization: `Bearer ${POI_TOKEN}`,
+  },
+});
+
 export async function getMaterials() {
-  return await http.get("/materials").then((response) => response.data.data);
+  return http.get("/materials").then((response) => response.data.data);
+}
+export async function createNewOrder(order: Partial<Order>) {
+  return http.post("/orders", order).then((response) => response.data.data);
+}
+export function uploadOrderItemFile(orderId: number, file: File) {
+  const formData = new FormData();
+  formData.append("file", file);
+  return httpForm.post(`/orderItems/${orderId}/uploadFile`, formData).then((response) => response.data.data);
 }

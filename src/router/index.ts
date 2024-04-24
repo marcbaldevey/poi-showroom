@@ -11,6 +11,12 @@ const routes = [
     name: "SendFile",
     component: () => import("../views/SendFile.vue"),
   },
+  {
+    path: "/order-created/:orderId",
+    name: "OrderCreated",
+    component: () => import("../views/OrderCreated.vue"),
+    props: true,
+  },
 ];
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

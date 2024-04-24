@@ -28,9 +28,9 @@
           </div>
         </template>
       </Steps>
-      <FileUpload v-if="activeIndex == 0" />
+      <FileUpload v-if="activeIndex == 0" v-model:files="files" />
       <ChooseMaterial v-if="activeIndex == 1" v-model:selectedMaterial="selectedMaterial" />
-      <SendToPOI v-if="activeIndex == 2" :selected-material="selectedMaterial" />
+      <SendToPOI v-if="activeIndex == 2" :selected-material="selectedMaterial" :file="files[0]" />
     </div>
   </div>
 </template>
@@ -44,7 +44,7 @@ import { Material } from "../types";
 
 const activeIndex = ref(0);
 const selectedMaterial = ref<Material>({} as Material);
-
+const files = ref<File[]>([]);
 const items = ref([
   {
     label: "Upload File",

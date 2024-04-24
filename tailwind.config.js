@@ -20,6 +20,7 @@ export default {
           950: "#431407",
         },
         surface: {
+          0: "rgb(var(--surface-0))",
           50: "rgb(var(--surface-50))",
           100: "rgb(var(--surface-100))",
           200: "rgb(var(--surface-200))",

@@ -30,3 +30,61 @@ export type MaterialType = {
   inkType: null;
   inkTypeId: null;
 };
+export type Order = {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  metadata: null;
+  name: string;
+  code: string;
+  createdById: number;
+  ownerId: string;
+  comments: string;
+  dueDate: null;
+  orderItems: OrderItem[];
+};
+
+export type OrderItem = {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  metadata: object;
+  companyId: string;
+  quantity: number;
+  width: number;
+  length: number;
+  widthUnits: string;
+  lengthUnits: string;
+  description: string;
+  comments: string;
+  orderId: number;
+  currentFile: File;
+  currentFileId: number;
+  filesHistory: File[];
+  line: number;
+  material: Material;
+  materialId: number;
+  position: number;
+  workflowStageId: number;
+  rootComment: number;
+  status: string;
+  receivers: any[];
+  parentId: number;
+};
+
+export type File = {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  metadata: object;
+  originalName: string;
+  uuid: string;
+  type: string;
+  location: string;
+  path: string;
+  replacedDate: string;
+  preview?: File;
+  previewId: number | null;
+  orderItemId: number | null;
+  schemeId: number;
+};

@@ -6,8 +6,8 @@
       accept="image/*"
       :max-file-size="50000000"
       class="p-fileupload h-full"
-      :pt="{ root: { class: 'h-full' }, content: { class: 'p-fileupload-content h-full' } }"
-      @upload="onTemplatedUpload($event)"
+      :pt="{ root: { class: 'h-full' }, content: { class: 'p-fileupload-content h-full bg-surface-50 border border-bg-surface-200' } }"
+      @upload="onTemplatedUpload()"
       @select="onSelectedFiles"
     >
       <template #header="{ chooseCallback, clearCallback, files }">
@@ -53,52 +53,35 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import { usePrimeVue } from "primevue/config";
 import Button from "primevue/button";
 import ProgressBar from "primevue/progressbar";
-import FileUpload from "primevue/fileupload";
+import FileUpload, { FileUploadSelectEvent } from "primevue/fileupload";
 
 const $primevue = usePrimeVue();
 
 const totalSize = ref(0);
 const totalSizePercent = ref(0);
-// const files = ref([]);
+const files = defineModel("files", { required: true });
 
-// const onRemoveTemplatingFile = (file, removeFileCallback, index) => {
-//   removeFileCallback(index);
-//   totalSize.value -= parseInt(formatSize(file.size));
-//   totalSizePercent.value = totalSize.value / 10;
-// };
-
-// const onClearTemplatingUpload = (clear) => {
-//   clear();
-//   totalSize.value = 0;
-//   totalSizePercent.value = 0;
-// };
-
-// const onSelectedFiles = (event) => {
-//   files.value = event.files;
-//   files.value.forEach((file) => {
-//     totalSize.value += parseInt(formatSize(file.size));
-//   });
-// };
-
-// const uploadEvent = (callback) => {
-//   totalSizePercent.value = totalSize.value / 10;
-//   callback();
-// };
+const onSelectedFiles = (event: FileUploadSelectEvent) => {
+  files.value = event.files;
+};
 
 const onTemplatedUpload = () => {
   console.log("Uploaded");
 };
 
-const formatSize = (bytes) => {
+const formatSize = (bytes: number) => {
   const k = 1024;
   const dm = 3;
-  const sizes = $primevue.config.locale.fileSizeTypes;
+  const sizes = $primevue.config.locale?.fileSizeTypes;
 
+  if (!sizes) {
+    return "";
+  }
   if (bytes === 0) {
     return `0 ${sizes[0]}`;
   }
@@ -116,9 +99,8 @@ const formatSize = (bytes) => {
   margin-bottom: 1rem;
 }
 .p-fileupload-buttonbar {
-  background: #ffffff;
   padding: 1.125rem;
-  border: 1px solid #e2e8f0;
+
   color: #334155;
   border-bottom: 0 none;
   border-top-right-radius: 6px;
@@ -126,9 +108,8 @@ const formatSize = (bytes) => {
   gap: 0.5rem;
 }
 .p-fileupload-content {
-  background: #ffffff;
   padding: 0 1.125rem 1.125rem 1.125rem;
-  border: 1px solid #e2e8f0;
+
   border-top: none;
   color: #334155;
   border-bottom-right-radius: 6px;
