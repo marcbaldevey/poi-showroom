@@ -12,6 +12,7 @@ const props = defineProps({
   },
 });
 const POI_FRONTEND_URL = import.meta.env.VITE_POI_FRONTEND_URL as string;
-const orderURL = `${POI_FRONTEND_URL}/home/orders/${props.orderId}`;
+const POI_TOKEN = import.meta.env.VITE_POI_TOKEN as string;
+const orderURL = `${POI_FRONTEND_URL}/home/orders/${props.orderId}?token=${POI_TOKEN}`;
 </script>
 <style></style>
