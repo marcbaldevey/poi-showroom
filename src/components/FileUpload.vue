@@ -36,7 +36,7 @@
       </template>
       <template #content="{ files }">
         <div v-for="file of files" :key="file.name + file.type + file.size" class="m-0 p-0 flex flex-col w-full h-full items-start">
-          <img class="object-cover w-full flex-1 min-h-0 rounded-xl" role="presentation" :alt="file.name" :src="file.objectURL" />
+          <img class="object-cover w-full flex-1 min-h-0 rounded-xl" role="presentation" :alt="file.name" :src="objectURL(file)" />
           <div class="flex items-end py-2">
             <span class="font-semibold">{{ file.name }}</span>
             <span class="ml-2 text-sm">({{ formatSize(file.size) }})</span>
@@ -90,6 +90,10 @@ const formatSize = (bytes: number) => {
   const formattedSize = parseFloat((bytes / Math.pow(k, i)).toFixed(dm));
 
   return `${formattedSize} ${sizes[i]}`;
+};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const objectURL = (file: any) => {
+  return file.objectURL;
 };
 </script>
 <style>
