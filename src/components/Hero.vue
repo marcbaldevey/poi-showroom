@@ -5,7 +5,7 @@
         <span class="block text-3xl md:text-6xl font-sans font-bold mb-1">Send your designs to</span>
         <div
           class="bg-clip-text text-5xl md:text-6xl text-transparent bg-opacity-10 font-extrabold mb-3 backdrop-blur-sm"
-          style="background-image: url(&quot;src/assets/hero.jpg&quot;); background-position: center"
+          style="background-image: url(&quot;/hero.jpg&quot;); background-position: center"
         >
           Web to Print Community
         </div>
@@ -18,7 +18,7 @@
       </section>
     </div>
     <div class="w-full opacity-35 md:opacity-100 absolute md:static md:w-3/6 h-full flex justify-end">
-      <img src="../assets/hero.jpg" alt="Image" class="object-cover w-full md:w-4/5 2xl:w-full md:clip-polygon-12" />
+      <img src="/hero.jpg" alt="Image" class="object-cover w-full md:w-4/5 2xl:w-full md:clip-polygon-12" />
     </div>
   </section>
 </template>

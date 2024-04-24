@@ -12,11 +12,7 @@
               }"
               @click="selectedMaterial = material"
             >
-              <img
-                class="aspect-video w-9/12 sm:w-[16rem] xl:w-[10rem] shadow-md block xl:block mx-auto rounded"
-                :src="`src/assets/${material.sku}.jpg`"
-                :alt="material.name"
-              />
+              <img class="aspect-video w-9/12 sm:w-[16rem] xl:w-[10rem] shadow-md block xl:block mx-auto rounded" :src="`/${material.sku}.jpg`" :alt="material.name" />
               <div class="flex flex-col sm:flex-row justify-between items-center xl:items-start flex-1 gap-4 h-full">
                 <div class="flex flex-col items-center sm:items-start gap-3">
                   <div class="text-2xl font-bold text-surface-900 dark:text-surface-0">{{ material.name }}</div>
