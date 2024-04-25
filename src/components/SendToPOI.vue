@@ -88,7 +88,7 @@ const send = () => {
           });
       }
     })
-    .finally(() => {
+    .catch(() => {
       sending.value = false;
     });
 };
