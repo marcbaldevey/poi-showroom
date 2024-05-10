@@ -30,13 +30,15 @@
             :value="totalSizePercent"
             :show-value="false"
             :class="['progressbar md:w-80 h-4 w-full md:ml-auto', { 'exceeded-progress-bar': totalSizePercent > 100 }]"
-            ><span class="whitespace-nowrap">{{ totalSize }}B / 1Mb</span></ProgressBar
           >
+            <span class="whitespace-nowrap">{{ totalSize }}B / 1Mb</span>
+          </ProgressBar>
         </div>
       </template>
       <template #content="{ files }">
         <div v-for="file of files" :key="file.name + file.type + file.size" class="m-0 p-0 flex flex-col w-full h-full items-start">
-          <img class="object-cover w-full flex-1 min-h-0 rounded-xl" role="presentation" :alt="file.name" :src="objectURL(file)" />
+          <img v-if="brokenImage" class="object-contain w-full flex-1 min-h-0 rounded-xl" role="presentation" :alt="file.name" src="/no-image.svg" />
+          <img v-else class="object-cover w-full flex-1 min-h-0 rounded-xl" role="presentation" :alt="file.name" :src="objectURL(file)" @error="useFallbackImage" />
           <div class="flex items-end py-2">
             <span class="font-semibold">{{ file.name }}</span>
             <span class="ml-2 text-sm">({{ formatSize(file.size) }})</span>
@@ -65,6 +67,7 @@ const $primevue = usePrimeVue();
 const totalSize = ref(0);
 const totalSizePercent = ref(0);
 const files = defineModel("files", { required: true });
+const brokenImage = ref(false);
 
 const onSelectedFiles = (event: FileUploadSelectEvent) => {
   files.value = event.files;
@@ -95,6 +98,10 @@ const formatSize = (bytes: number) => {
 const objectURL = (file: any) => {
   return file.objectURL;
 };
+
+const useFallbackImage = () => {
+  brokenImage.value = true;
+};
 </script>
 <style>
 .card {
@@ -102,6 +109,7 @@ const objectURL = (file: any) => {
   border-radius: 10px;
   margin-bottom: 1rem;
 }
+
 .p-fileupload-buttonbar {
   padding: 1.125rem;
 
@@ -111,6 +119,7 @@ const objectURL = (file: any) => {
   border-top-left-radius: 6px;
   gap: 0.5rem;
 }
+
 .p-fileupload-content {
   padding: 0 1.125rem 1.125rem 1.125rem;
 
@@ -122,10 +131,12 @@ const objectURL = (file: any) => {
   align-items: center;
   justify-content: center;
 }
+
 .progressbar {
   height: 1rem !important;
   width: 15rem !important;
 }
+
 input[type="file"] {
   display: none;
 }
