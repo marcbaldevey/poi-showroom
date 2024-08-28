@@ -48,7 +48,7 @@
       <template #empty>
         <div class="flex items-center justify-center flex-col">
           <i class="pi pi-cloud-upload border-2 rounded-full p-5 text-8xl text-surface-400 border-surface-400" />
-          <p class="mt-4 mb-0">Drag and drop files to here to upload.</p>
+          <p class="mt-4 mb-0">Drag and drop files here to upload.</p>
         </div>
       </template>
     </FileUpload>

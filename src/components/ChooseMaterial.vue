@@ -1,6 +1,9 @@
 <template>
   <div class="card flex justify-center">
-    <DataView :value="materials" data-key="id" class="w-4/5">
+    <div v-if="isLoading" class="w-full h-80 flex justify-center items-center">
+      <ProgressSpinner style="width: 50px; height: 50px" stroke-width="8" fill="transparent" animation-duration=".5s" aria-label="Custom ProgressSpinner" />
+    </div>
+    <DataView v-else :value="materials" data-key="id" class="w-4/5">
       <template #list="slotProps">
         <div class="flex flex-wrap">
           <div v-for="(material, index) in slotProps.items" :key="index" class="w-full p-3">
@@ -39,18 +42,18 @@ import { ref } from "vue";
 import { getMaterials } from "../services/poi.services";
 import DataView from "primevue/dataview";
 import { Material } from "../types";
+import ProgressSpinner from "primevue/progressspinner";
 
 const materials = ref<Material[]>([]);
 const selectedMaterial = defineModel<Material>("selectedMaterial", { required: true });
+const isLoading = ref(true);
 
 const isSelected = (material: Material) => {
   return selectedMaterial.value?.id === material.id;
 };
 
-getMaterials().then((res) => {
-  console.log(res);
-
-  materials.value = res;
-});
+getMaterials()
+  .then((res) => (materials.value = res))
+  .finally(() => (isLoading.value = false));
 </script>
 <style></style>
